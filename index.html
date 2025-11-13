@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apheon Host Creator - Reseller Panel Pterodactyl </title>
+<style>
+  * { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f0f8ff, #e6f7ff, #f0f8ff);
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
+    color: #1a1a1a;
+    overflow-x: hidden;
+  }
+
+  @keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Banner Promosi Bergerak */
+  .promo-banner {
+    position: relative;
+    width: 100%;
+    height: 45px;
+    background: linear-gradient(90deg, #007bff, #0056b3, #007bff);
+    color: white;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+  }
+
+  .promo-content {
+    display: flex;
+    animation: scrollBanner 25s linear infinite;
+    white-space: nowrap;
+  }
+
+  .promo-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 40px;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .promo-item span {
+    margin-right: 10px;
+    font-size: 1.1rem;
+  }
+
+  @keyframes scrollBanner {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* ===== Header Profesional ===== */
+  header {
+    background: linear-gradient(90deg, #007bff, #00bfff);
+    color: white;
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  
+  header p {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+
+  /* ===== Kontainer Utama ===== */
+  .main-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  .container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+
+  .container-header {
+    background: linear-gradient(90deg, #007bff, #00bfff);
+    color: white;
+    padding: 20px 30px;
+  }
+
+  .container-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .container-body {
+    padding: 30px;
+  }
+
+  /* ===== Form ===== */
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  }
+
+  button {
+    background: linear-gradient(90deg, #007bff, #00bfff);
+    border: none;
+    padding: 16px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+  }
+
+  button:hover {
+    background: linear-gradient(90deg, #0066cc, #0099ff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+  }
+
+  /* ===== Hasil ===== */
+  pre {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* ===== Panduan Penggunaan ===== */
+  .usage-guide {
+    margin-top: 40px;
+  }
+
+  .guide-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .step {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #007bff;
+  }
+
+  .step-number {
+    background: #007bff;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .step h4 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .step p {
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* ===== FAQ ===== */
+  .faq-container {
+    margin-top: 40px;
+  }
+
+  .faq-item {
+    margin-bottom: 15px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  .faq-answer.active {
+    padding: 15px 20px;
+    max-height: 500px;
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    background: #2c3e50;
+    color: white;
+    padding: 40px 0;
+    margin-top: 60px;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+
+  .footer-section h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+
+  .footer-section p, .footer-section a {
+    color: #bdc3c7;
+    line-height: 1.6;
+    text-decoration: none;
+  }
+
+  .footer-section a:hover {
+    color: white;
+  }
+
+  .copyright {
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 1px solid #34495e;
+    color: #bdc3c7;
+    font-size: 0.9rem;
+  }
+
+  /* ===== Tombol Hubungi Kami ===== */
+  .contact-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: linear-gradient(90deg, #25D366, #128C7E);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .contact-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ===== Responsif ===== */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+    
+    .main-container {
+      margin: 20px auto;
+    }
+    
+    .container-body {
+      padding: 20px;
+    }
+    
+    .guide-steps {
+      grid-template-columns: 1fr;
+    }
+    
+    .promo-banner {
+      height: 40px;
+    }
+    
+    .promo-item {
+      font-size: 0.85rem;
+      padding: 0 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Banner Promosi Bergerak ===== -->
+<div class="promo-banner">
+  <div class="promo-content">
+    <div class="promo-item"><span>🚀</span> Promo Spesial: Diskon 50% untuk Paket Unlimited!</div>
+    <div class="promo-item"><span>⭐</span> Hosting Terbaik dengan Uptime 99.9%</div>
+    <div class="promo-item"><span>🔧</span> Support 24/7 dari Tim Professional</div>
+    <div class="promo-item"><span>💰</span> Garansi Uang Kembali 30 Hari</div>
+    <div class="promo-item"><span>⚡</span> Server High Performance dengan SSD NVMe</div>
+    <!-- Duplikat untuk efek loop yang mulus -->
+    <div class="promo-item"><span>🚀</span> Promo Spesial: Diskon 50% untuk Paket Unlimited!</div>
+    <div class="promo-item"><span>⭐</span> Hosting Terbaik dengan Uptime 99.9%</div>
+    <div class="promo-item"><span>🔧</span> Support 24/7 dari Tim Professional</div>
+    <div class="promo-item"><span>💰</span> Garansi Uang Kembali 30 Hari</div>
+    <div class="promo-item"><span>⚡</span> Server High Performance dengan SSD NVMe</div>
+  </div>
+</div>
+
+<!-- ===== Header Profesional ===== -->
+<header>
+  <div class="header-content">
+    <h1>🚀 Apheonolipe Host Creator</h1>
+    <p>Panel Hosting Pterodactyl Otomatis & Terpercaya</p>
+  </div>
+</header>
+
+<!-- ===== Kontainer Utama ===== -->
+<div class="main-container">
+  <!-- ===== Form Pembuatan Panel ===== -->
+  <div class="container">
+    <div class="container-header">
+      <h2>Buat Panel Pterodactyl</h2>
+    </div>
+    <div class="container-body">
+      <form id="panelForm">
+        <div class="form-group">
+          <label for="username">Nama Pengguna</label>
+          <input type="text" id="username" name="username" placeholder="Masukkan username (tanpa spasi)" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="panelPass">Password Panel</label>
+          <input type="password" id="panelPass" name="panelPass" placeholder="Password panel (opsional)" />
+        </div>
+        
+        <div class="form-group">
+          <label for="paket">Pilih Paket</label>
+          <select id="paket" name="paket">
+            <option value="1gb">1 GB - RAM 1125MB, Disk 1125MB, CPU 40%</option>
+            <option value="2gb">2 GB - RAM 2125MB, Disk 2125MB, CPU 60%</option>
+            <option value="3gb">3 GB - RAM 3125MB, Disk 3125MB, CPU 80%</option>
+            <option value="4gb">4 GB - RAM 4125MB, Disk 4125MB, CPU 100%</option>
+            <option value="5gb">5 GB - RAM 5125MB, Disk 5125MB, CPU 120%</option>
+            <option value="10gb">10 GB - RAM 10125MB, Disk 10125MB, CPU 220%</option>
+            <option value="unli">Unlimited - RAM, Disk & CPU Unlimited</option>
+          </select>
+        </div>
+        
+        <button type="submit">🚀 Buat Panel Sekarang</button>
+      </form>
+      <pre id="result">Panel akan dibuat setelah Anda mengisi form di atas dan menekan tombol "Buat Panel Sekarang".</pre>
+    </div>
+  </div>
+
+  <!-- ===== Panduan Penggunaan ===== -->
+  <div class="container">
+    <div class="container-header">
+      <h2>📖 Bagaimana Cara Menggunakan Website Ini?</h2>
+    </div>
+    <div class="container-body">
+      <div class="usage-guide">
+        <div class="guide-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h4>Masukkan Username</h4>
+            <p>Isi username untuk panel Anda. Pastikan tidak mengandung spasi dan menggunakan karakter alfanumerik.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h4>Password (Opsional)</h4>
+            <p>Anda dapat mengisi password khusus atau biarkan kosong untuk menggunakan password acak yang aman.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h4>Pilih Paket</h4>
+            <p>Pilih paket yang sesuai dengan kebutuhan Anda, mulai dari 1GB hingga Unlimited resources.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h4>Klik "Buat Panel"</h4>
+            <p>Setelah mengisi form, klik tombol "Buat Panel Sekarang" dan tunggu proses pembuatan hingga selesai.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">5</div>
+            <h4>Panel Siap Digunakan</h4>
+            <p>Setelah berhasil, Anda akan mendapatkan detail panel yang dapat digunakan untuk mengakses server hosting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FAQ ===== -->
+  <div class="container">
+    <div class="container-header">
+      <h2>❓ Pertanyaan Umum</h2>
+    </div>
+    <div class="container-body">
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(0)">
+            Apa itu Apheon Host Creator?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Apheon Host Creator adalah platform otomatis untuk membuat panel hosting Pterodactyl dengan mudah. Anda dapat membuat server hosting dalam hitungan menit tanpa perlu pengetahuan teknis yang mendalam.</p
+            >
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(1)">
+            Berapa lama proses pembuatan panel?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Proses pembuatan panel biasanya memakan waktu 1-3 menit setelah Anda mengklik tombol "Buat Panel Sekarang". Sistem akan secara otomatis membuat user, server, dan mengkonfigurasi semua yang diperlukan.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(2)">
+            Apakah ada garansi untuk panel yang dibuat?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Ya, kami memberikan garansi aktif 10 hari untuk setiap panel yang dibuat. Jika terdapat masalah teknis dalam periode tersebut, Anda dapat mengajukan replacement satu kali.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(3)">
+            Bagaimana jika lupa password panel?
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Password panel akan ditampilkan sekali setelah pembuatan berhasil. Harap simpan dengan baik. Jika lupa password, Anda perlu membuat panel baru karena kami tidak menyimpan data password untuk keamanan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Tentang Kami</h3>
+      <p>Apheonolipe Host menyediakan solusi hosting terbaik dengan panel Pterodactyl otomatis. Fokus kami adalah kemudahan penggunaan dan keandalan layanan.</p>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Layanan</h3>
+      <p><a href="#">Hosting Panel Pterodactyl</a></p>
+      <p><a href="#">Server Minecraft</a></p>
+      <p><a href="#">VPS Hosting</a></p>
+      <p><a href="#">Domain Registration</a></p>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Kontak</h3>
+      <p>Email: ahsidausg@gmail.com</p>
+      <p>Telegram: @CityXlay</p>
+      <p>WhatsApp: +62 822-6161-0293</p>
+    </div>
+  </div>
+  
+  <div class="copyright">
+    &copy; 2023 Apheon Host Creator. All rights reserved.
+  </div>
+</footer>
+
+<!-- ===== Tombol Hubungi Kami ===== -->
+<button class="contact-btn" onclick="window.open('https://wa.me/6282261610293','_blank')">
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WA" width="20" height="20"> Hubungi Kami
+</button>
+
+<script>
+// ============== Konfigurasi Rahasia API Panel (tidak tampil di web) ==============
+const config = (() => {
+  const hidden = {
+    egg: "15", // Egg ID
+    nestid: "5", // Nest ID
+    loc: "1", // Location ID
+    domain: "https://yogzzxxpublikk.zonapanel.web.id",
+    apikey: "ptla_4aW8bc2wBcQWnAxspqhSE5MYuxoyOW0LlT7iPezhZRM",
+    capikey: "ptlc_9kVYKeSFQMRorrRqrZ0PEIVYbcRGjFARzcEb0IIPb16"
+  };
+  return hidden;
+})();
+
+// ============== Logika Pembuatan Panel ==============
+const resources = {
+  '1gb': { ram: 1125, disk: 1125, cpu: 40 },
+  '2gb': { ram: 2125, disk: 2125, cpu: 60 },
+  '3gb': { ram: 3125, disk: 3125, cpu: 80 },
+  '4gb': { ram: 4125, disk: 4125, cpu: 100 },
+  '5gb': { ram: 5125, disk: 5125, cpu: 120 },
+  '10gb': { ram: 10125, disk: 10125, cpu: 220 },
+  'unli': { ram: 0, disk: 0, cpu: 0 }
+};
+
+document.getElementById('panelForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const resBox = document.getElementById('result');
+  const submitBtn = document.querySelector('button[type="submit"]');
+  
+  resBox.textContent = '⏳ Membuat panel... Harap tunggu sebentar.';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Membuat Panel...';
+
+  const form = new FormData(e.target);
+  const username = form.get('username').trim().toLowerCase();
+  const password = form.get('panelPass').trim() || Math.random().toString(36).slice(-8);
+  const paket = form.get('paket');
+  const { ram, disk, cpu } = resources[paket];
+
+  // Validasi username
+  if (username.includes(' ')) {
+    resBox.textContent = '❌ Error: Username tidak boleh mengandung spasi!';
+    submitBtn.disabled = false;
+    submitBtn.textContent = '🚀 Buat Panel Sekarang';
+    return;
+  }
+
+  const data = {
+    name: username,
+    user: 1,
+    egg: config.egg,
+    docker_image: "ghcr.io/parkervcp/yolks:nodejs_18",
+    startup: "npm start",
+    environment: {},
+    limits: { memory: ram, swap: 0, disk: disk, io: 500, cpu: cpu },
+    feature_limits: { databases: 2, allocations: 1, backups: 2 },
+    allocation: { default: config.loc }
+  };
+
+  try {
+    const response = await fetch("/api/panel", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ username, paket })
+});
+
+    const result = await response.json();
+    if (!response.ok) throw result;
+    
+    resBox.textContent = `✅ Panel berhasil dibuat!\n\n` +
+      `📋 Detail Panel:\n` +
+      `├─ ID: ${result.attributes.id}\n` +
+      `├─ Nama: ${username}\n` +
+      `├─ Password: ${password}\n` +
+      `├─ RAM: ${paket === 'unli' ? 'Unlimited' : paket}\n` +
+      `├─ Disk: ${paket === 'unli' ? 'Unlimited' : paket}\n` +
+      `├─ CPU: ${paket === 'unli' ? 'Unlimited' : cpu + '%'}\n` +
+      `└─ Domain: ${config.domain}\n\n` +
+      `⚠️ Simpan informasi ini dengan baik!\n` +
+      `Data hanya ditampilkan sekali dan tidak dapat dipulihkan.`;
+      
+  } catch (err) {
+    console.error(err);
+    resBox.textContent = `❌ Gagal membuat panel:\n${JSON.stringify(err.errors ? err.errors[0] : err, null, 2)}`;
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = '🚀 Buat Panel Sekarang';
+  }
+});
+
+// ============== Fungsi FAQ ==============
+function toggleFAQ(index) {
+  const answers = document.querySelectorAll('.faq-answer');
+  const questions = document.querySelectorAll('.faq-question span');
+  
+  if (answers[index].classList.contains('active')) {
+    answers[index].classList.remove('active');
+    questions[index].textContent = '+';
+  } else {
+    answers.forEach(answer => answer.classList.remove('active'));
+    questions.forEach(question => question.textContent = '+');
+    
+    answers[index].classList.add('active');
+    questions[index].textContent = '-';
+  }
+}
+</script>
+
+</body>
+</html>
